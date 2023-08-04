@@ -1,0 +1,10 @@
+
+      <nb-card style="max-width: 90%; margin-left: 5%;max-height: 90%; margin-top: 2%;">
+        <nb-card-header>Requests: 
+         <nb-icon nbPrefix icon="close-circle-outline" pack="eva" (click)="close()" style="float: right;cursor: pointer;"  ></nb-icon>
+        </nb-card-header>
+        <nb-card-body>
+            <ng2-smart-table [settings]="settings" [source]="source" ></ng2-smart-table>
+        </nb-card-body>
+      </nb-card>
+

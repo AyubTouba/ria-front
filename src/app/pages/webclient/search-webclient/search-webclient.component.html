@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      <nb-card-header>Choice a webclient</nb-card-header>
+      <nb-card-body>
+        <div class="form-inline">
+          <nb-select placeholder="Select a webclient" (selectedChange)="webAppSelected($event)">
+            <nb-option *ngFor="let website of websites " [value]="website"> {{ website.server_name }}</nb-option>
+          </nb-select>
+          <button type="submit" nbButton status="primary" hero (click)="detail()">Details</button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+ <div class="col-md-12"  *ngIf="isSelected">
+  <div class="row">
+    <div class="col-md-6">
+      <ngx-data-webclient [webclient]="webApplicationSelected"></ngx-data-webclient>
+    </div>
+    <div class="col-md-6">
+      <nb-card>
+        <nb-card-header>
+         Total Requests by final status : 
+        </nb-card-header>
+      
+        <nb-card-body>
+      <ngx-logrequest-status [logRequests]="logRequests" ></ngx-logrequest-status>
+          </nb-card-body>
+        </nb-card>
+    </div>
+
+ </div>
+ <div class="row">
+  <div class="col-md-6">
+    <nb-card>
+      <nb-card-header>
+       Total by methode requests : 
+      </nb-card-header>
+    
+      <nb-card-body>
+    <wbt-bar-chart [data]="methodRequests" [optionConfig]="optionConfigChartRequestMethod" ></wbt-bar-chart>
+        </nb-card-body>
+      </nb-card>
+  </div>
+
+</div>
+</div>
+</div>
+
+

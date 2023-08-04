@@ -1,0 +1,123 @@
+<div class="row" *ngIf="isLoaded">
+ <div class="col-md-12">
+  <nb-card >
+    <nb-tabset fullWidth>
+      <nb-tab tabTitle="General Informations">
+            <div class="row">
+              <div class="col-md-6" *ngIf="website$ | async as website">
+                <ngx-data-webclient [webclient]="website"></ngx-data-webclient>
+              </div>
+              <div class="col-md-6">
+                <nb-card>
+                  <nb-card-header>
+                  Total Requests by final status : 
+                  </nb-card-header>
+                
+                  <nb-card-body>
+                    <div *ngIf="getlogRequest$ | async as logRequestDt">
+                      <wbt-bar-chart [data]="logRequestDt" [mapData]="mapData" [optionConfig]="optionConfigChartRequestStatus" ></wbt-bar-chart>
+                    </div>
+                  </nb-card-body>
+
+                  </nb-card>
+              </div>
+        </div>
+      </nb-tab>
+      <nb-tab tabTitle="Charts statistics">
+              <div class="row">
+                <div class="col-md-6">
+                  <nb-card>
+                    <nb-card-header>
+                    Total by methode requests : 
+                    </nb-card-header>
+                  
+                    <nb-card-body>
+                      <div *ngIf="getlogRequestMethod$ | async as methodRequests">
+                         <wbt-bar-chart [data]="methodRequests" [mapData]="mapData" [optionConfig]="optionConfigChartRequestMethod" ></wbt-bar-chart>
+                      </div> 
+                    </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="col-md-6">
+                  <nb-card>
+                    <nb-card-header>
+                    Total by user agent : 
+                    </nb-card-header>
+                  
+                    <nb-card-body>
+                      <div *ngIf="getlogRequestUserAgent$ | async as logRequestUserAgent">
+                         <wbt-bar-chart [data]="logRequestUserAgent" [mapData]="mapData" [optionConfig]="optionConfigChartRequestMethod" ></wbt-bar-chart>
+                       </div>     
+                    </nb-card-body>
+                    </nb-card>
+                </div>
+              </div>
+            </nb-tab>
+            <nb-tab tabTitle="Errors requests">
+              <div class="row">
+                <div class="col-md-6">
+                  <nb-card>
+                    <nb-card-header>
+                    404 Error Request : 
+                    </nb-card-header>
+                  
+                    <nb-card-body>
+                    <div *ngIf="getlogRequestError$ | async as getlogRequestError">
+                        <div *ngIf=" getlogRequestError.length > 0 else noData404">
+                            <wbt-chartline [dataInput]="getlogRequestError | transformDataDate" (dataLine)="showDetailRequest($event,getlogRequestError)"></wbt-chartline>
+                        </div>
+
+                        <ng-template #noData404>
+                            <nb-alert status="info">  There's no 404 http request!</nb-alert>
+                        </ng-template>  
+                    </div>
+                    </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="col-md-6">
+                  <nb-card>
+                    <nb-card-header>
+                    500 Error Request : 
+                    </nb-card-header>
+                  
+                    <nb-card-body>
+                    <div *ngIf="getlogRequestError500$ | async as getlogRequestError500">
+                      <div *ngIf="getlogRequestError500.length > 0 else noData500">
+                        <wbt-chartline [dataInput]="getlogRequestError500 | transformDataDate:'warning'" (dataLine)="showDetailRequest($event,getlogRequestError500)"></wbt-chartline>
+                      </div>
+                      
+                      <ng-template #noData500>
+                        <nb-alert status="info">  There's no 500 http request!</nb-alert>
+                      </ng-template>
+                    </div>
+                      </nb-card-body>
+                    </nb-card>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <nb-card>
+                    <nb-card-header>
+                    499 Error Request : 
+                    </nb-card-header>
+                  
+                    <nb-card-body>
+                    <div *ngIf="getlogRequestError499$ | async as getlogRequestError499">
+                          <div *ngIf="getlogRequestError499.length > 0 else noData499">
+                            <wbt-chartline [dataInput]="getlogRequestError499 | transformDataDate:'warning' " (dataLine)="showDetailRequest($event,getlogRequestError499)"></wbt-chartline>
+                          </div>
+                          <ng-template #noData499>
+                            <nb-alert status="info">  There's no 499 http request!</nb-alert>
+                          </ng-template> 
+                    </div>  
+                  </nb-card-body>
+                    </nb-card>
+                </div>
+                </div>
+            </nb-tab>
+</nb-tabset>
+</nb-card>
+</div>
+</div>
+
+

@@ -1,0 +1,49 @@
+      <nb-card>
+        <nb-card-header>Information</nb-card-header>
+        <nb-card-body>
+            <div class="form-group row">
+              <label for="servername" class="label col-sm-3 col-form-label">Name:</label>
+              <div class="col-sm-9">
+                <nb-form-field>
+                  <nb-icon nbPrefix icon="monitor-outline" pack="eva"></nb-icon>
+                <input type="text" readonly nbInput fullWidth id="servername" [value]="webclient.server_name">
+              </nb-form-field> 
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="domain" class="label col-sm-3 col-form-label">Domain:</label>
+              <div class="col-sm-9">
+                <nb-form-field>
+                  <nb-icon nbPrefix icon="browser-outline" pack="eva"></nb-icon>
+                <input type="text" readonly nbInput fullWidth id="domain" [value]="webclient.domain">
+                </nb-form-field> 
+              </div>
+            </div>
+            <div class="form-group row">
+                <label for="date" class="label col-sm-3 col-form-label">Created Date:</label>
+                <div class="col-sm-9">
+                 <nb-form-field>
+                  <nb-icon nbPrefix icon="calendar-outline" pack="eva"></nb-icon>
+                  <input type="text" readonly nbInput fullWidth id="date" [value]="webclient.created_at">
+                    </nb-form-field>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="server" class="label col-sm-3 col-form-label">Server:</label>
+                <div class="col-sm-9">
+                 <nb-form-field>
+                  <nb-icon nbPrefix icon="hard-drive-outline" pack="eva"></nb-icon>
+                  <input type="text" readonly nbInput fullWidth id="server" [value]="webclient.server.name">
+                    </nb-form-field>
+                </div>
+              </div>
+            <div class="form-group row">
+                <label for="configured" class="label col-sm-3 col-form-label">Configured:</label>
+                <div class="col-sm-9">
+                 
+                  <nb-icon style="margin-top: 5px;" nbPrefix [icon]=" webclient.is_configured ? 'checkmark-circle-2-outline' : 'close-circle-outline' " pack="eva"></nb-icon>
+                </div>
+            </div>
+        </nb-card-body>
+      </nb-card>
+ 

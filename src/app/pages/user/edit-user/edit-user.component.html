@@ -1,0 +1,89 @@
+
+      <nb-card>
+        <nb-card-header>Edit a user</nb-card-header>
+        <nb-card-body>
+          <form  [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+            <div class="form-group row">
+                <label for="inputuser1"   class="label col-sm-3 col-form-label">Username</label>
+                <div class="col-sm-9"> 
+                  <input type="text"
+                   nbInput
+                   formControlName="username"
+                     fullWidth id="inputuser1" placeholder="Username"
+                     [status]="f.username.touched ? (f.username.errors  ? 'danger' : 'success') : 'basic'"  >
+                 
+                     <ng-container *ngIf="f.username.invalid && f.username.touched">
+                      <p class="caption status-danger" *ngIf="f.username.errors?.required">
+                        Username is required!
+                      </p>
+                      <p class="caption status-danger" *ngIf="f.username.errors?.minlength">
+                        Username must has a min 3 chars
+                      </p>
+                      <p class="caption status-danger" *ngIf="f.username.errors?.maxlength">
+                        Username must has a max 10 chars
+                      </p>
+                    </ng-container>
+                    </div>    
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail1" class="label col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <input type="email" nbInput
+                formControlName="email"
+                 fullWidth 
+                id="inputEmail1" 
+                placeholder="Email"
+
+                [status]="f.email.touched ? (f.email.errors  ? 'danger' : 'success') : 'basic'"  >
+                 
+                <ng-container *ngIf="f.email.invalid && f.email.touched">
+                 <p class="caption status-danger" *ngIf="f.email.errors?.required">
+                   Email Adress is required!
+                 </p>
+                 <p class="caption status-danger" *ngIf="f.email.errors?.email">
+                   Email must be a valid email address
+                 </p>
+               </ng-container>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword2" class="label col-sm-3 col-form-label">Password</label>
+              <div class="col-sm-9">
+                <input type="password" nbInput fullWidth 
+                 id="inputPassword2" formControlName="password"
+                 placeholder="Password"
+                  [status]="f.password.touched ? (f.password.errors  ? 'danger' : 'success') : 'basic'"  >
+                 
+                 <ng-container *ngIf="f.password.invalid && f.password.touched">
+                  <p class="caption status-danger" *ngIf="f.password.errors?.required">
+                    Password Adress is required!
+                  </p>
+                  <p class="caption status-danger" *ngIf="f.password.errors?.minlength">
+                    Password must be at least 6 char
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputactive2"  placeholder="select website" class="label col-sm-3 col-form-label">website to select <i>(ignore selecting websites if the user get all fo them)</i> </label>
+                <div class="col-sm-9">
+                    <nb-select multiple style="min-width: 250px;" formControlName="webClients" >
+                        <nb-option *ngFor="let website of websites" [value]="website._id">{{website.domain}}</nb-option> 
+                      </nb-select> 
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputactive2" class="label col-sm-3 col-form-label">Status</label>
+                <div class="col-sm-9">
+                  <nb-checkbox status="success" formControlName="is_active"></nb-checkbox>
+                </div>
+              </div>
+            <div class="form-group row">
+              <div class="offset-sm-3 col-sm-9">
+                <button [disabled]="editUserForm.invalid" nbButton status="primary" style="margin: 2px;">Edit</button>
+              </div>
+            </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+
